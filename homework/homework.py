@@ -5,6 +5,27 @@ Escriba el codigo que ejecute la accion solicitada.
 # pylint: disable=import-outside-toplevel
 
 
+from homework.extracted_data import lectura_archivos_zip
+from homework.extracted_data import validacion_datos
+from homework.extracted_data import concatenar_archivos
+
+from homework.transformation import client
+from homework.transformation import campaign
+from homework.transformation import economics
+
+def extracted_data():
+    lista_archivos = lectura_archivos_zip()
+    validacion_datos(lista_archivos)
+    bank_marketing_campaing_df = concatenar_archivos(lista_archivos)
+
+    return bank_marketing_campaing_df
+
+bank_marketing_campaing_df =extracted_data()
+
+client(bank_marketing_campaing_df)
+campaign(bank_marketing_campaing_df)
+economics(bank_marketing_campaing_df)
+
 def clean_campaign_data():
     """
     En esta tarea se le pide que limpie los datos de una campaña de
@@ -50,7 +71,11 @@ def clean_campaign_data():
 
     """
 
-    return
+    client(bank_marketing_campaing_df)
+    campaign(bank_marketing_campaing_df)
+    economics(bank_marketing_campaing_df)
+
+    return print("Los archivos han sido limpiados y almacenados en la carpeta files/output/")
 
 
 if __name__ == "__main__":
